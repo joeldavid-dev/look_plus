@@ -40,9 +40,8 @@ class PeliculaInfoScreen extends StatelessWidget {
         title: Text(
           pelicula.title,
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
+              color: Colors.white, fontSize: 16, fontFamily: 'Varela'),
+          textAlign: TextAlign.center,
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/img/loading.gif'),
@@ -71,13 +70,6 @@ class PeliculaInfoScreen extends StatelessWidget {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                pelicula.title,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6, //antes title, ahora headline6
-                overflow: TextOverflow.ellipsis,
-              ),
               Text(
                 pelicula.originalTitle,
                 style: Theme.of(context).textTheme.subtitle1,

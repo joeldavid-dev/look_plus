@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:look_plus/constants.dart';
 import 'package:look_plus/providers/peliculas_provider.dart';
+import 'package:look_plus/screens/home/components/barraTitulo.dart';
 
 import 'components/cardSwiper.dart';
 import 'components/movie_horizontal.dart';
@@ -13,56 +14,38 @@ class HomeScreen extends StatelessWidget {
     peliculasProvider.getPopulares();
 
     return Scaffold(
-      appBar: _buildAppBar(),
+      //appBar: _buildAppBar(),
       backgroundColor: colorFondoApp,
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: margenApp),
-                child: _titulo(tituloApp)),
-            SizedBox(height: 10),
-            Expanded(
-                child: ListView(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: margenApp),
-                    child: _subtitulo('Peliculas en cines')),
-                SizedBox(height: 10),
-                _swiperTarjetas(),
-                SizedBox(height: 20),
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: margenApp),
-                    child: _subtitulo('Populares')),
-                SizedBox(height: 10),
-                _footer(context),
-              ],
-            ))
-          ]),
+      body: SafeArea(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              BarraTitulo(),
+              Expanded(
+                  child: ListView(
+                children: [
+                  Padding(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: margenApp),
+                      child: _subtitulo('Peliculas en cines')),
+                  SizedBox(height: 10),
+                  _swiperTarjetas(),
+                  SizedBox(height: 20),
+                  Padding(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: margenApp),
+                      child: _subtitulo('Populares')),
+                  SizedBox(height: 10),
+                  _footer(context),
+                ],
+              ))
+            ]),
+      ),
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-        backgroundColor: colorFondoApp,
-        elevation: 0,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.search,
-                color: colorAcento,
-              ),
-              onPressed: null)
-        ]);
-  }
-
-  Text _titulo(String texto) {
-    return Text(texto,
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold));
-  }
-
   Text _subtitulo(String texto) {
-    return Text(texto, style: TextStyle(fontSize: 18));
+    return Text(texto, style: TextStyle(fontSize: 16));
   }
 
   Widget _swiperTarjetas() {

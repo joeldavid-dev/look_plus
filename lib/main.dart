@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: tituloApp,
       theme: ThemeData(
-        textTheme: Theme.of(context).textTheme.apply(
-            //fontFamily:,
-            bodyColor: colorLetras),
-        //primarySwatch: Colors.black,
+        textTheme: Theme.of(context)
+            .textTheme
+            .apply(fontFamily: 'Varela', bodyColor: colorLetras),
+        primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
