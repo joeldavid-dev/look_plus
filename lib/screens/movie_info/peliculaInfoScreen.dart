@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:look_plus/constants.dart';
 import 'package:look_plus/models/pelicula_model.dart';
+import 'package:look_plus/screens/movie_info/components/casting_horizontal.dart';
 
 class PeliculaInfoScreen extends StatelessWidget {
   @override
@@ -18,10 +19,12 @@ class PeliculaInfoScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 _posterTitulo(context, pelicula),
                 _descripcion(pelicula),
-                _descripcion(pelicula),
-                _descripcion(pelicula),
-                _descripcion(pelicula),
-                _descripcion(pelicula),
+                SizedBox(height: 20),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: margenApp),
+                    child: _subtitulo('Cast')),
+                SizedBox(height: 10),
+                CastingHorizontal(pelicula: pelicula),
               ]),
             )
           ],
@@ -93,5 +96,9 @@ class PeliculaInfoScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: margenApp, vertical: 30),
       child: Text(pelicula.overview),
     );
+  }
+
+  Text _subtitulo(String texto) {
+    return Text(texto, style: TextStyle(fontSize: 16));
   }
 }
