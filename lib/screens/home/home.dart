@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:look_plus/constants.dart';
 import 'package:look_plus/providers/peliculas_provider.dart';
+import 'package:look_plus/screens/components/EstilosTexto.dart';
 import 'package:look_plus/screens/home/components/barraTitulo.dart';
 
 import 'components/cardSwiper.dart';
@@ -24,17 +25,11 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                   child: ListView(
                 children: [
-                  Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: margenApp),
-                      child: _subtitulo('Peliculas en cines')),
+                  subtitulo('Peliculas en cines'),
                   SizedBox(height: 10),
                   _swiperTarjetas(),
                   SizedBox(height: 20),
-                  Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: margenApp),
-                      child: _subtitulo('Populares')),
+                  subtitulo('Populares'),
                   SizedBox(height: 10),
                   _footer(context),
                 ],
@@ -42,10 +37,6 @@ class HomeScreen extends StatelessWidget {
             ]),
       ),
     );
-  }
-
-  Text _subtitulo(String texto) {
-    return Text(texto, style: TextStyle(fontSize: 16));
   }
 
   Widget _swiperTarjetas() {
@@ -56,7 +47,7 @@ class HomeScreen extends StatelessWidget {
           return CardSwiper(peliculas: snapshot.data);
         } else {
           return Container(
-            height: 400,
+            height: 300,
             child: Center(
               child: CircularProgressIndicator(),
             ),

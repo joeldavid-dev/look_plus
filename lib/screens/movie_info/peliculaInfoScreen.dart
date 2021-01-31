@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:look_plus/constants.dart';
 import 'package:look_plus/models/pelicula_model.dart';
+import 'package:look_plus/screens/components/EstilosTexto.dart';
 import 'package:look_plus/screens/movie_info/components/casting_horizontal.dart';
 
 class PeliculaInfoScreen extends StatelessWidget {
@@ -18,11 +19,12 @@ class PeliculaInfoScreen extends StatelessWidget {
               delegate: SliverChildListDelegate([
                 SizedBox(height: 10),
                 _posterTitulo(context, pelicula),
+                SizedBox(height: 20),
+                subtitulo('Resumen'),
+                SizedBox(height: 10),
                 _descripcion(pelicula),
                 SizedBox(height: 20),
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: margenApp),
-                    child: _subtitulo('Cast')),
+                subtitulo('Cast'),
                 SizedBox(height: 10),
                 CastingHorizontal(pelicula: pelicula),
               ]),
@@ -43,12 +45,15 @@ class PeliculaInfoScreen extends StatelessWidget {
         title: Text(
           pelicula.title,
           style: TextStyle(
-              color: Colors.white, fontSize: 16, fontFamily: 'Varela'),
+              color: Colors.white,
+              fontSize: 16,
+              fontFamily: 'Varela',
+              fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/img/loading.gif'),
-          image: NetworkImage(pelicula.getBackgroundImg()),
+          image: NetworkImage(pelicula.getPosterImg()),
           //Me da error fadeInDuration: Duration(microseconds: 150),
           fit: BoxFit.cover,
         ),
@@ -83,7 +88,7 @@ class PeliculaInfoScreen extends StatelessWidget {
                   Icon(Icons.star_border, color: colorAcento),
                   Text(pelicula.voteAverage.toString())
                 ],
-              )
+              ),
             ],
           ))
         ],
@@ -93,12 +98,15 @@ class PeliculaInfoScreen extends StatelessWidget {
 
   Widget _descripcion(Pelicula pelicula) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: margenApp, vertical: 30),
-      child: Text(pelicula.overview),
+      padding: EdgeInsets.symmetric(horizontal: margenApp),
+      child: _getResumen(pelicula),
     );
   }
 
-  Text _subtitulo(String texto) {
-    return Text(texto, style: TextStyle(fontSize: 16));
+  Text _getResumen(Pelicula pelicula) {
+    if (pelicula.overview == '') {
+      return Text('La pelicula no tiene resumen... aún.');
+    }
+    return Text(pelicula.overview);
   }
 }

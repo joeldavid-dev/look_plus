@@ -21,7 +21,7 @@ class MovieHorizontal extends StatelessWidget {
       }
     });
     return Container(
-      height: 200,
+      height: 170,
       child: PageView.builder(
         pageSnapping: false, // Desactiva la sensacion de iman en el scroll
         controller: _pageController,
@@ -42,7 +42,7 @@ class MovieHorizontal extends StatelessWidget {
               image: NetworkImage(pelicula.getPosterImg()),
               placeholder: AssetImage('assets/img/no-imagen.png'),
               fit: BoxFit.cover,
-              height: 150,
+              height: 140,
             ),
           ),
           SizedBox(height: 5.0),

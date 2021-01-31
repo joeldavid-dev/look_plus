@@ -25,7 +25,7 @@ class CastingHorizontal extends StatelessWidget {
 
   Widget _crearActoresPageView(List<Actor> actores) {
     return SizedBox(
-      height: 150,
+      height: 130,
       child: PageView.builder(
         pageSnapping: false,
         controller: PageController(viewportFraction: 0.3, initialPage: 1),

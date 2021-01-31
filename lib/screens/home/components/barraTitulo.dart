@@ -12,7 +12,7 @@ class BarraTitulo extends StatefulWidget {
 class _BarraTituloState extends State<BarraTitulo> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: margenApp, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
