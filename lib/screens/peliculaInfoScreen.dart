@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:look_plus/constants.dart';
 import 'package:look_plus/models/pelicula_model.dart';
 import 'package:look_plus/screens/components/EstilosTexto.dart';
-import 'package:look_plus/screens/movie_info/components/casting_horizontal.dart';
+import 'package:look_plus/screens/components/casting_horizontal.dart';
 
 class PeliculaInfoScreen extends StatelessWidget {
   @override

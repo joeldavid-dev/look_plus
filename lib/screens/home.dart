@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:look_plus/providers/peliculas_provider.dart';
 import 'package:look_plus/screens/components/EstilosTexto.dart';
-import 'package:look_plus/screens/home/components/barraTitulo.dart';
+import 'package:look_plus/screens/components/barraTitulo.dart';
 
 import 'components/cardSwiper.dart';
 import 'components/movie_horizontal.dart';

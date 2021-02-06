@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:look_plus/search/search_delegate.dart';
 
-import '../../../constants.dart';
+import '../../constants.dart';
 
 class BarraTitulo extends StatefulWidget {
   BarraTitulo({Key key}) : super(key: key);

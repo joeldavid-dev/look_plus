@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:look_plus/constants.dart';
-import 'package:look_plus/screens/home/home.dart';
-import 'package:look_plus/screens/movie_info/peliculaInfoScreen.dart';
+import 'package:look_plus/screens/home.dart';
+import 'package:look_plus/screens/peliculaInfoScreen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
