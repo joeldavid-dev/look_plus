@@ -66,11 +66,14 @@ class PeliculaInfoScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: margenApp),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image(
-              image: NetworkImage(pelicula.getPosterImg()),
-              height: 150,
+          Hero(
+            tag: pelicula.uniqueID,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image(
+                image: NetworkImage(pelicula.getPosterImg()),
+                height: 150,
+              ),
             ),
           ),
           SizedBox(width: 20),

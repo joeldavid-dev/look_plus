@@ -18,7 +18,8 @@ class CastingHorizontal extends StatelessWidget {
           if (snapshot.hasData) {
             return _crearActoresPageView(snapshot.data);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Container(
+                height: 130, child: Center(child: CircularProgressIndicator()));
           }
         });
   }

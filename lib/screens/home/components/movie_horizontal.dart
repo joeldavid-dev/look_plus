@@ -32,17 +32,22 @@ class MovieHorizontal extends StatelessWidget {
   }
 
   Widget _targeta(BuildContext context, Pelicula pelicula) {
+    pelicula.uniqueID = '${pelicula.id}-populares';
+
     final _tarjetaContainer = Container(
       margin: EdgeInsets.only(right: 15),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: FadeInImage(
-              image: NetworkImage(pelicula.getPosterImg()),
-              placeholder: AssetImage('assets/img/no-imagen.png'),
-              fit: BoxFit.cover,
-              height: 140,
+          Hero(
+            tag: pelicula.uniqueID,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: FadeInImage(
+                image: NetworkImage(pelicula.getPosterImg()),
+                placeholder: AssetImage('assets/img/no-imagen.png'),
+                fit: BoxFit.cover,
+                height: 140,
+              ),
             ),
           ),
           SizedBox(height: 5.0),
