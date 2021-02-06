@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: tituloApp,
       theme: ThemeData(
+        appBarTheme: AppBarTheme(color: colorAcento),
+        scaffoldBackgroundColor: colorFondoApp,
         textTheme: Theme.of(context)
             .textTheme
             .apply(fontFamily: 'Varela', bodyColor: colorLetras),

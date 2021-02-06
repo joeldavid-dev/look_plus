@@ -11,32 +11,30 @@ class PeliculaInfoScreen extends StatelessWidget {
     final _screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: colorFondoApp,
         body: CustomScrollView(
-          slivers: <Widget>[
-            _crearAppbar(pelicula, _screenSize.height),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                SizedBox(height: 10),
-                _posterTitulo(context, pelicula),
-                SizedBox(height: 20),
-                subtitulo('Resumen'),
-                SizedBox(height: 10),
-                _descripcion(pelicula),
-                SizedBox(height: 20),
-                subtitulo('Cast'),
-                SizedBox(height: 10),
-                CastingHorizontal(pelicula: pelicula),
-              ]),
-            )
-          ],
-        ));
+      slivers: <Widget>[
+        _crearAppbar(pelicula, _screenSize.height),
+        SliverList(
+          delegate: SliverChildListDelegate([
+            SizedBox(height: 10),
+            _posterTitulo(context, pelicula),
+            SizedBox(height: 20),
+            subtitulo('Resumen'),
+            SizedBox(height: 10),
+            _descripcion(pelicula),
+            SizedBox(height: 20),
+            subtitulo('Cast'),
+            SizedBox(height: 10),
+            CastingHorizontal(pelicula: pelicula),
+          ]),
+        )
+      ],
+    ));
   }
 
   Widget _crearAppbar(Pelicula pelicula, double heightPantalla) {
     return SliverAppBar(
       elevation: 0,
-      backgroundColor: colorAcento,
       expandedHeight: heightPantalla * 0.6,
       floating: false,
       pinned: true,

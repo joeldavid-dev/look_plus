@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:look_plus/search/search_delegate.dart';
 
 import '../../../constants.dart';
 
@@ -13,18 +14,23 @@ class _BarraTituloState extends State<BarraTitulo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: margenApp, vertical: 10),
+      padding: const EdgeInsets.only(
+          left: margenApp, right: margenApp, top: 15, bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(tituloApp,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Center(
+            child: Text(tituloApp,
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+          ),
           IconButton(
               icon: Icon(
                 Icons.search,
                 color: colorAcento,
               ),
-              onPressed: null)
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch(), query: '');
+              })
         ],
       ),
     );
