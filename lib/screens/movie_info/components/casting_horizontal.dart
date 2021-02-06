@@ -41,7 +41,7 @@ class CastingHorizontal extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundImage: NetworkImage(actor.getFoto()),
-            radius: 50,
+            radius: 40,
           ),
           Text(actor.name,
               overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12)),

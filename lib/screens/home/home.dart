@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
           return CardSwiper(peliculas: snapshot.data);
         } else {
           return Container(
-            height: 300,
+            height: 400,
             child: Center(
               child: CircularProgressIndicator(),
             ),
