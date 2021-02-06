@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:look_plus/search/search_delegate.dart';
 
 import '../../constants.dart';
 
@@ -29,7 +28,9 @@ class _BarraTituloState extends State<BarraTitulo> {
                 color: colorAcento,
               ),
               onPressed: () {
-                showSearch(context: context, delegate: DataSearch(), query: '');
+                //showSearch(context: context, delegate: DataSearch(), query: '');
+
+                Navigator.pushNamed(context, 'busqueda');
               })
         ],
       ),

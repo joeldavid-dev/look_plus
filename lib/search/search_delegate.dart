@@ -3,6 +3,8 @@ import 'package:look_plus/constants.dart';
 import 'package:look_plus/models/pelicula_model.dart';
 import 'package:look_plus/providers/peliculas_provider.dart';
 
+//En desuso
+
 class DataSearch extends SearchDelegate {
   final peliculasProvider = new PeliculasProvider();
 

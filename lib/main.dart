@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:look_plus/constants.dart';
 import 'package:look_plus/screens/home.dart';
 import 'package:look_plus/screens/peliculaInfoScreen.dart';
+import 'package:look_plus/screens/search_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: tituloApp,
       theme: ThemeData(
+        floatingActionButtonTheme:
+            FloatingActionButtonThemeData(backgroundColor: colorAcento),
         appBarTheme: AppBarTheme(color: colorAcento),
         scaffoldBackgroundColor: colorFondoApp,
         textTheme: Theme.of(context)
@@ -32,6 +35,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (BuildContext context) => HomeScreen(),
         'detalle': (BuildContext context) => PeliculaInfoScreen(),
+        'busqueda': (BuildContext context) => SearchScreen(),
       },
     );
   }
