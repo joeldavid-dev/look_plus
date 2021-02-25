@@ -5,18 +5,17 @@ import 'package:look_plus/screens/home.dart';
 import 'package:look_plus/screens/peliculaInfoScreen.dart';
 import 'package:look_plus/screens/search_screen.dart';
 
-void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    systemNavigationBarColor: colorFondoApp,
-  ));
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: colorFondoApp,
+    ));
+
     return MaterialApp(
       title: tituloApp,
       theme: ThemeData(

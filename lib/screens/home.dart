@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:look_plus/constants.dart';
 import 'package:look_plus/providers/peliculas_provider.dart';
 import 'package:look_plus/screens/components/EstilosTexto.dart';
 import 'package:look_plus/screens/components/barraTitulo.dart';
@@ -14,24 +15,28 @@ class HomeScreen extends StatelessWidget {
     peliculasProvider.getPopulares();
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              BarraTitulo(),
-              Expanded(
-                  child: ListView(
-                children: [
-                  subtitulo('Peliculas en cines'),
-                  SizedBox(height: 10),
-                  _swiperTarjetas(),
-                  SizedBox(height: 20),
-                  subtitulo('Populares'),
-                  SizedBox(height: 10),
-                  _footer(context),
-                ],
-              ))
-            ]),
+      body: Stack(
+        children: [
+          _fondoGradiente(),
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                    child: ListView(
+                  children: [
+                    SizedBox(height: 80),
+                    subtitulo('Peliculas en cines'),
+                    SizedBox(height: 10),
+                    _swiperTarjetas(),
+                    SizedBox(height: 20),
+                    subtitulo('Populares'),
+                    SizedBox(height: 10),
+                    _footer(context),
+                  ],
+                ))
+              ]),
+          Positioned(top: 0, child: BarraTitulo()),
+        ],
       ),
     );
   }
@@ -72,6 +77,23 @@ class HomeScreen extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
         },
+      ),
+    );
+  }
+
+  Widget _fondoGradiente() {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: FractionalOffset(0.0, 0.6),
+          end: FractionalOffset(0.0, 1.0),
+          colors: [
+            colorFondoApp,
+            Colors.black,
+          ],
+        ),
       ),
     );
   }
