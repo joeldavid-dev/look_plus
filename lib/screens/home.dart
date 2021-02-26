@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:look_plus/constants.dart';
 import 'package:look_plus/providers/peliculas_provider.dart';
 import 'package:look_plus/screens/components/EstilosTexto.dart';
 import 'package:look_plus/screens/components/barraTitulo.dart';
@@ -12,26 +11,40 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    peliculasProvider.getProximos();
     peliculasProvider.getPopulares();
+    peliculasProvider.getMejores();
 
     return Scaffold(
       body: Stack(
         children: [
-          _fondoGradiente(),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
                     child: ListView(
+                  cacheExtent: double.infinity,
+                  /*Para mantener toda la pantalla en cache, de esta forma
+                      se conserva todos los elementos intactos.
+                      */
                   children: [
                     SizedBox(height: 90),
                     subtitulo('Peliculas en cines'),
                     SizedBox(height: 10),
                     _swiperTarjetas(),
                     SizedBox(height: 20),
+                    subtitulo('Proximamente...'),
+                    SizedBox(height: 10),
+                    _footerProximos(context),
+                    SizedBox(height: 20),
                     subtitulo('Populares'),
                     SizedBox(height: 10),
-                    _footer(context),
+                    _footerPopulares(context),
+                    SizedBox(height: 20),
+                    subtitulo('Mejor calificadas'),
+                    SizedBox(height: 10),
+                    _footerMejores(context),
+                    SizedBox(height: 20),
                   ],
                 ))
               ]),
@@ -59,9 +72,30 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _footer(BuildContext context) {
+  Widget _footerProximos(BuildContext context) {
     return Container(
-      width: double.infinity,
+      child: StreamBuilder(
+        //StreamBuilder construye el widget con datos obtenidos por Bloc
+        stream: peliculasProvider
+            .proximosStream, //Aqui se indica de donde se están escuchando los datos
+
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return MovieHorizontal(
+              peliculas: snapshot.data,
+              siguientePagina: peliculasProvider.getProximos,
+              llave: 'Proximos',
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _footerPopulares(BuildContext context) {
+    return Container(
       child: StreamBuilder(
         //StreamBuilder construye el widget con datos obtenidos por Bloc
         stream: peliculasProvider
@@ -72,6 +106,7 @@ class HomeScreen extends StatelessWidget {
             return MovieHorizontal(
               peliculas: snapshot.data,
               siguientePagina: peliculasProvider.getPopulares,
+              llave: 'Populares',
             );
           } else {
             return Center(child: CircularProgressIndicator());
@@ -81,19 +116,39 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _fondoGradiente() {
+  Widget _ultimaPelicula() {
+    return FutureBuilder(
+      future: peliculasProvider.getUltima(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+            child: subtitulo('Si hay'),
+          );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _footerMejores(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: FractionalOffset(0.0, 0.6),
-          end: FractionalOffset(0.0, 1.0),
-          colors: [
-            colorFondoApp,
-            Colors.black,
-          ],
-        ),
+      child: StreamBuilder(
+        //StreamBuilder construye el widget con datos obtenidos por Bloc
+        stream: peliculasProvider
+            .mejoresStream, //Aqui se indica de donde se están escuchando los datos
+
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return MovieHorizontal(
+              peliculas: snapshot.data,
+              siguientePagina: peliculasProvider.getMejores,
+              llave: 'Mejores',
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

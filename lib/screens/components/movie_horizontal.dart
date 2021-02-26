@@ -4,8 +4,12 @@ import 'package:look_plus/models/pelicula_model.dart';
 class MovieHorizontal extends StatelessWidget {
   final List<Pelicula> peliculas;
   final Function siguientePagina;
+  final String llave;
 
-  MovieHorizontal({@required this.peliculas, @required this.siguientePagina});
+  MovieHorizontal(
+      {@required this.peliculas,
+      @required this.siguientePagina,
+      @required this.llave});
 
   final _pageController = new PageController(
     initialPage: 1,
@@ -32,7 +36,7 @@ class MovieHorizontal extends StatelessWidget {
   }
 
   Widget _targeta(BuildContext context, Pelicula pelicula) {
-    pelicula.uniqueID = '${pelicula.id}-populares';
+    pelicula.uniqueID = '${pelicula.id}-$llave';
 
     final _tarjetaContainer = Container(
       margin: EdgeInsets.only(right: 15),

@@ -15,9 +15,15 @@ class PeliculasProvider {
   String _language = 'es-MX';
 
   int _popularesPage = 0;
-  bool _cargando = false;
+  int _mejoresPage = 0;
+  int _proximosPage = 0;
+  bool _cargandoP = false;
+  bool _cargandoM = false;
+  bool _cargandoPr = false;
 
   List<Pelicula> _populares = new List();
+  List<Pelicula> _mejores = new List();
+  List<Pelicula> _proximos = new List();
 
   //Inicia bloc
   final _popularesStreamController =
@@ -29,8 +35,27 @@ class PeliculasProvider {
   Stream<List<Pelicula>> get popularesStream =>
       _popularesStreamController.stream; //escuchar las peliculas
 
+  final _mejoresStreamController = StreamController<List<Pelicula>>.broadcast();
+
+  Function(List<Pelicula>) get mejoresSink =>
+      _mejoresStreamController.sink.add; //introducir peliculas
+
+  Stream<List<Pelicula>> get mejoresStream =>
+      _mejoresStreamController.stream; //escuchar las peliculas
+
+  final _proximosStreamController =
+      StreamController<List<Pelicula>>.broadcast();
+
+  Function(List<Pelicula>) get proximosSink =>
+      _proximosStreamController.sink.add; //introducir peliculas
+
+  Stream<List<Pelicula>> get proximosStream =>
+      _proximosStreamController.stream; //escuchar las peliculas
+
   void disposeStreams() {
     _popularesStreamController.close();
+    _mejoresStreamController.close();
+    _proximosStreamController.close();
   }
   //termina bloc
 
@@ -50,7 +75,7 @@ class PeliculasProvider {
 
     final decodedData = json.decode(resp.body);
 
-    final pelicula = new Pelicula.fromJsonMap(decodedData['results']);
+    final pelicula = new Pelicula.fromJsonMap(decodedData);
 
     return pelicula;
   }
@@ -64,13 +89,13 @@ class PeliculasProvider {
     return await _procesarRespuestas(url);
   }
 
-  Future<List<Pelicula>> getPopulares() async {
-    if (_cargando) return [];
+  getPopulares() async {
+    if (_cargandoP) return [];
     /*_cargando es un booleano que se cierra cuando ya hay un Future ejecutandose,
     de esta forma se evita que se hagan muchas solicitudes a la api y que descarge 
     la misma información inesesariamente. Parecido a un cerrojo en hilos de
     Java*/
-    _cargando = true;
+    _cargandoP = true;
 
     _popularesPage++;
 
@@ -83,8 +108,7 @@ class PeliculasProvider {
     final resp = await _procesarRespuestas(url);
     _populares.addAll(resp);
     popularesSink(_populares);
-    _cargando = false;
-    return resp;
+    _cargandoP = false;
   }
 
   Future<List<Actor>> getCast(String peliId) async {
@@ -116,5 +140,49 @@ class PeliculasProvider {
       'language': _language,
     });
     return await _procesarRespuesta(url);
+  }
+
+  getMejores() async {
+    if (_cargandoM) return [];
+    /*_cargando es un booleano que se cierra cuando ya hay un Future ejecutandose,
+    de esta forma se evita que se hagan muchas solicitudes a la api y que descarge 
+    la misma información inesesariamente. Parecido a un cerrojo en hilos de
+    Java*/
+    _cargandoM = true;
+
+    _mejoresPage++;
+
+    final url = Uri.https(_url, '3/movie/top_rated', {
+      'api_key': _apikey,
+      'language': _language,
+      'page': _mejoresPage.toString(),
+    });
+
+    final resp = await _procesarRespuestas(url);
+    _mejores.addAll(resp);
+    mejoresSink(_mejores);
+    _cargandoM = false;
+  }
+
+  getProximos() async {
+    if (_cargandoPr) return [];
+    /*_cargando es un booleano que se cierra cuando ya hay un Future ejecutandose,
+    de esta forma se evita que se hagan muchas solicitudes a la api y que descarge 
+    la misma información inesesariamente. Parecido a un cerrojo en hilos de
+    Java*/
+    _cargandoPr = true;
+
+    _proximosPage++;
+
+    final url = Uri.https(_url, '3/movie/upcoming', {
+      'api_key': _apikey,
+      'language': _language,
+      'page': _proximosPage.toString(),
+    });
+
+    final resp = await _procesarRespuestas(url);
+    _proximos.addAll(resp);
+    proximosSink(_proximos);
+    _cargandoPr = false;
   }
 }
