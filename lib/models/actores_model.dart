@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Cast {
   //coleccion de actores
   List<Actor> actores = new List();
@@ -44,10 +46,10 @@ class Actor {
     profilePath = json['profile_path'];
   }
 
-  getFoto() {
+  ImageProvider getFoto() {
     if (profilePath == null) {
-      return 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png';
+      return AssetImage('assets/img/no-actor.png');
     }
-    return 'https://images.tmdb.org/t/p/w500/$profilePath';
+    return NetworkImage('https://images.tmdb.org/t/p/w500/$profilePath');
   }
 }

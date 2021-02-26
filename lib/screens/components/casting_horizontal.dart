@@ -41,7 +41,7 @@ class CastingHorizontal extends StatelessWidget {
       child: Column(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(actor.getFoto()),
+            backgroundImage: actor.getFoto(),
             radius: 40,
           ),
           Text(actor.name,

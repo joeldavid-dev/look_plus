@@ -63,7 +63,7 @@ class Pelicula {
     backdropPath = json['backdrop_path'];
     adult = json['adult'];
     overview = json['overview'];
-    releaseDate = json['relase_date'];
+    releaseDate = json['release_date'];
   }
 
   getPosterImg() {

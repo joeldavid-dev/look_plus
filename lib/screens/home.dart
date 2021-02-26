@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                     child: ListView(
                   children: [
-                    SizedBox(height: 80),
+                    SizedBox(height: 90),
                     subtitulo('Peliculas en cines'),
                     SizedBox(height: 10),
                     _swiperTarjetas(),

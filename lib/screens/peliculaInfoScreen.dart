@@ -17,7 +17,7 @@ class PeliculaInfoScreen extends StatelessWidget {
         SliverList(
           delegate: SliverChildListDelegate([
             SizedBox(height: 10),
-            _posterTitulo(context, pelicula),
+            _infoPrincipal(context, pelicula),
             SizedBox(height: 20),
             subtitulo('Resumen'),
             SizedBox(height: 10),
@@ -59,7 +59,7 @@ class PeliculaInfoScreen extends StatelessWidget {
     );
   }
 
-  Widget _posterTitulo(BuildContext context, Pelicula pelicula) {
+  Widget _infoPrincipal(BuildContext context, Pelicula pelicula) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: margenApp),
       child: Row(
@@ -76,22 +76,25 @@ class PeliculaInfoScreen extends StatelessWidget {
           ),
           SizedBox(width: 20),
           Flexible(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                pelicula.originalTitle,
-                style: Theme.of(context).textTheme.subtitle1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Row(
-                children: [
-                  Icon(Icons.star_border, color: colorAcento),
-                  Text(pelicula.voteAverage.toString())
-                ],
-              ),
-            ],
-          ))
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  pelicula.originalTitle,
+                  style: Theme.of(context).textTheme.subtitle1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.star_border, color: colorAcento),
+                    Text(pelicula.voteAverage.toString())
+                  ],
+                ),
+                SizedBox(height: 10),
+                _getFechaPelicula(pelicula),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -108,6 +111,20 @@ class PeliculaInfoScreen extends StatelessWidget {
     if (pelicula.overview == '') {
       return Text('La pelicula no tiene resumen... aún.');
     }
-    return Text(pelicula.overview);
+    return Text(
+      pelicula.overview,
+      textAlign: TextAlign.justify,
+    );
+  }
+
+  Text _getFechaPelicula(Pelicula pelicula) {
+    if (pelicula.releaseDate == null) {
+      return Text('Fecha desconocida');
+    } else {
+      return Text(
+        pelicula.releaseDate,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
   }
 }

@@ -34,7 +34,8 @@ class PeliculasProvider {
   }
   //termina bloc
 
-  Future<List<Pelicula>> _procesarRespuesta(Uri url) async {
+  //Proceso de json a peliculas ------------------------------------------------
+  Future<List<Pelicula>> _procesarRespuestas(Uri url) async {
     final resp = await http.get(url);
 
     final decodedData = json.decode(resp.body);
@@ -44,12 +45,23 @@ class PeliculasProvider {
     return peliculas.items;
   }
 
+  Future<Pelicula> _procesarRespuesta(Uri url) async {
+    final resp = await http.get(url);
+
+    final decodedData = json.decode(resp.body);
+
+    final pelicula = new Pelicula.fromJsonMap(decodedData['results']);
+
+    return pelicula;
+  }
+  //Fin de proceso de json a peliculas -----------------------------------------
+
   Future<List<Pelicula>> getEnCines() async {
     final url = Uri.https(_url, '3/movie/now_playing', {
       'api_key': _apikey,
       'language': _language,
     });
-    return await _procesarRespuesta(url);
+    return await _procesarRespuestas(url);
   }
 
   Future<List<Pelicula>> getPopulares() async {
@@ -68,7 +80,7 @@ class PeliculasProvider {
       'page': _popularesPage.toString(),
     });
 
-    final resp = await _procesarRespuesta(url);
+    final resp = await _procesarRespuestas(url);
     _populares.addAll(resp);
     popularesSink(_populares);
     _cargando = false;
@@ -94,6 +106,14 @@ class PeliculasProvider {
       'api_key': _apikey,
       'language': _language,
       'query': query,
+    });
+    return await _procesarRespuestas(url);
+  }
+
+  Future<Pelicula> getUltima() async {
+    final url = Uri.https(_url, '3/movie/latest', {
+      'api_key': _apikey,
+      'language': _language,
     });
     return await _procesarRespuesta(url);
   }
