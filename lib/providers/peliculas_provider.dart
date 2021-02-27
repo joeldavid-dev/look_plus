@@ -53,10 +53,12 @@ class PeliculasProvider {
       _proximosStreamController.stream; //escuchar las peliculas
 
   void disposeStreams() {
+    //Al parecer importa el orden
     _popularesStreamController.close();
-    _mejoresStreamController.close();
     _proximosStreamController.close();
+    _mejoresStreamController.close();
   }
+
   //termina bloc
 
   //Proceso de json a peliculas ------------------------------------------------

@@ -116,21 +116,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _ultimaPelicula() {
-    return FutureBuilder(
-      future: peliculasProvider.getUltima(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.hasData) {
-          return Container(
-            child: subtitulo('Si hay'),
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
-    );
-  }
-
   Widget _footerMejores(BuildContext context) {
     return Container(
       child: StreamBuilder(
