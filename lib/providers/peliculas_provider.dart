@@ -21,9 +21,9 @@ class PeliculasProvider {
   bool _cargandoM = false;
   bool _cargandoPr = false;
 
-  List<Pelicula> _populares = new List();
-  List<Pelicula> _mejores = new List();
-  List<Pelicula> _proximos = new List();
+  List<Pelicula> _populares = [];
+  List<Pelicula> _mejores = [];
+  List<Pelicula> _proximos = [];
 
   //Inicia bloc
   final _popularesStreamController =

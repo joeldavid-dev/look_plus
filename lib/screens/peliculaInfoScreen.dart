@@ -12,6 +12,7 @@ class PeliculaInfoScreen extends StatelessWidget {
 
     return Scaffold(
         body: CustomScrollView(
+      cacheExtent: double.infinity,
       slivers: <Widget>[
         _crearAppbar(pelicula, _screenSize.height),
         SliverList(
